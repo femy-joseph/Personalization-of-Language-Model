@@ -3,13 +3,15 @@ from rank_bm25 import *
 from nltk.stem import PorterStemmer
 import string
 from nltk.corpus import stopwords
+from krovetzstemmer import Stemmer
+stemmer = Stemmer()
 
 
-ps=PorterStemmer()
+#ps=PorterStemmer()
 
 
 
-with open("Project/Lamp4-copy.json","r") as file:
+with open("CS_646_project/BM25/Lamp4.json","r") as file:
     data=json.load(file)
     
 
@@ -30,7 +32,7 @@ with open("Project/Lamp4-copy.json","r") as file:
 
             tokenized_text=[i for i in tokenized_text if str(i) not in string.punctuation]              #remove special characters
             tokenized_text=[word for word in tokenized_text if word not in stopwords.words('english')]  #remove stopwords
-            tokenized_text=[ps.stem(word) for word in tokenized_text]                                   #stemm tokenize corpus
+            tokenized_text=[stemmer.stem(word) for word in tokenized_text]                                   #stemm tokenize corpus
             tokenized_corpus.append(tokenized_text) 
 
 
