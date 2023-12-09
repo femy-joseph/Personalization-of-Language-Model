@@ -3,6 +3,8 @@ from rank_bm25 import *
 from nltk.stem import PorterStemmer
 import string
 from nltk.corpus import stopwords
+
+
 from krovetzstemmer import Stemmer
 stemmer = Stemmer()
 
@@ -11,7 +13,7 @@ stemmer = Stemmer()
 
 
 
-with open("CS_646_project/BM25/Lamp4.json","r") as file:
+with open("/Users/femimoljoseph/Fall23/CS-646/CS_646_project/BM25/Lamp4.json","r") as file:
     data=json.load(file)
     
 
@@ -45,7 +47,7 @@ with open("CS_646_project/BM25/Lamp4.json","r") as file:
         doc_scores = bm25.get_scores(tokenized_q)
         print("doc_scores:",doc_scores)
         top_n=bm25.get_top_n(tokenized_q, corpus, n=3)
-        print("query:",ip)
+        print("query:",tokenized_q)
         print("top_n docs are:",top_n)
 
 #print("corpus:",corpus)
