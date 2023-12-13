@@ -5,6 +5,7 @@ import re
 import shutil, os
 import warnings
 warnings.filterwarnings('ignore')
+
 #uncomment for first time index creation
 #pt.init(boot_packages=["com.github.terrierteam:terrier-prf:-SNAPSHOT"])
 
@@ -24,9 +25,6 @@ with open("/content/sample_data/Lamp4-copy.json","r") as file:
 
         query_df['query']=[re.sub('\W+',' ', str(x)) for x in query_df['query']]
 
-        #print(query_df['query'].to_string())
-        #print("query_df",query_df)
-
         #To remove indexd folder
         if os.path.exists('/content/pd_index_0'):
           for i in range(1):
@@ -35,10 +33,11 @@ with open("/content/sample_data/Lamp4-copy.json","r") as file:
 
         temp_index_path="./pd_index_"+str(i)
         pd_indexer = pt.DFIndexer(temp_index_path,stopwords=None)
+        
         #uncomment for first time index creation
         indexref = pd_indexer.index(user_df["text"], user_df["docno"])
         index = pt.IndexFactory.of("/content/"+temp_index_path+"/data.properties")
-        #print(index.getCollectionStatistics())
+
 
         #scoring with bm25 and rm3 -> bm25
         bm25 = pt.BatchRetrieve(index, wmodel="BM25")

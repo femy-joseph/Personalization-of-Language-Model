@@ -61,7 +61,7 @@ with open("/content/sample_data/dev_questions-3.json","r") as file:
         df = df.drop(df.columns[-1:],axis=1)
         first_prompt_doc_text = df.to_dict('records')[0]['text_x']
         original_query = query_df.to_dict('records')[0]['query']
-        input_to_LLM = original_query + 'here is the example tweet ' + first_prompt_doc_text
+        input_to_LLM = original_query
         print(input_to_LLM)
         with open('/content/sample_data/output.txt', 'a') as f:
           f.write(qid  + '-' + input_to_LLM + '\n')
